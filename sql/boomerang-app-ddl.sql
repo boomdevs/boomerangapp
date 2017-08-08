@@ -4,7 +4,7 @@ create table person (
     last_name varchar not null,
     nickname varchar,
     usba_member boolean not null default false,
-    competition_level
+    competition_level varchar,
     primary key(person_id)
 );
 
@@ -27,7 +27,7 @@ create table tournament (
 
 ---------------------------------------------------------------------------------
 
-create table touranment_person (
+create table tournament_person (
     tournament_id integer not null,
     person_id integer not null,
     role varchar not null,
@@ -66,7 +66,7 @@ insert into event (name) values ('Fast Catch');
 create table tournament_event (
     tournament_id integer not null,
     event_id integer not null,
-    order integer not null,
+    event_order integer not null,
     number_of_circles integer not null,
     primary key(tournament_id, event_id),
     foreign key(tournament_id) references tournament (tournament_id),
@@ -81,9 +81,10 @@ create table tournament_event_score (
     tournament_id integer not null,
     event_id integer not null,
     person_id integer not null,
+    role varchar not null default 'thrower' check (role = 'thrower'),
     primary key(tournament_id, event_id, person_id),
     foreign key(tournament_id, event_id) references tournament_event (tournament_id, event_id),
-    foreign key(tournament_id, person_id) references tournament_person (tournament_id, person_id)
+    foreign key(tournament_id, person_id, role) references tournament_person (tournament_id, person_id, role)
 );
 
 create index tournament_event_score_event_id_in on tournament_event_score (event_id);
