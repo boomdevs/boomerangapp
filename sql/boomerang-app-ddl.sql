@@ -42,8 +42,9 @@ create index tournament_person_period_id_in on tournament_person (person_id);
 
 create table event (
     event_id serial,
-    name varchar,
-    primary key(event_id)
+    name varchar not null,
+    primary key(event_id),
+    unique (name)
 );
 
 insert into event (name) values ('Accuracy 50');
@@ -58,7 +59,6 @@ insert into event (name) values ('Juggling');
 insert into event (name) values ('Juggling, Five Minutes');
 insert into event (name) values ('Long Distance');
 insert into event (name) values ('GLORP');
-insert into event (name) values ('Fast Catch');
 insert into event (name) values ('Fast Catch');
 
 ---------------------------------------------------------------------------------
