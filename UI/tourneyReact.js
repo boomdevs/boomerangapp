@@ -87,7 +87,7 @@ class Select extends React.Component {
 class Form extends React.Component {
   render() {
     return (
-      <form method='' action=''>
+      <form method='post' enctype='application/json' action=''>
 
 <center><h1>USBA Tournament Sanctioning Request</h1></center>
 
