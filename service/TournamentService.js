@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var fs = require("fs");
+import('./postg.js');
 
 
 app.get('/generateData',function(req,res){
@@ -58,7 +59,9 @@ app.get('/makeNewTournament',function(req, res){
     });
 })
 
-app.get('/addNew', function(req,res){
+app.post('/addNew', function(req,res){
+    
+    console.log("Adding...");
 
     fs.readFile("tournament.json",'utf8', function(err,data){
 
@@ -85,12 +88,19 @@ app.get('/addNew', function(req,res){
 
 })
 
-var server = app.listen(8080, function(){
-    //var host = process.env.IP;
-    //var port = process.env.PORT;
+app.get('/poke',function(req, res){
+    console.log('poking db...');
 
-    var host = "0.0.0.0";
-    var port = 8080;
+    helper.getConn();
+
+    });
+
+var server = app.listen(8080, function(){
+    var host = process.env.IP;
+    var port = process.env.PORT;
+
+    //var host = "0.0.0.0";
+    //var port = 8080;
 
     console.log("Listening at http://%s:%s", host, port);
 
