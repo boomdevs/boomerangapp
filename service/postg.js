@@ -4,11 +4,11 @@ exports.gresHelper = (function(){
     // declare private variables and/or functions.
 
 
-//jdbc:postgresql://34.197.159.40/boom
-//user = boom
-//pw = boomboom2
+//jdbc:postgresql://X/boom
+//user = 
+//pw = 
     console.log("I started.");
-    var connString = "boom:boomboom2@postgresql://34.197.159.40/boom"
+    var connString = "x:x@postgresql://X/boom"
     var client;
 
     var getConn = function(){
