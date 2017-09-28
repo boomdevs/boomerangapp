@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var fs = require("fs");
-import('./postg.js');
+require('./postg.js');
 
 
 app.get('/generateData',function(req,res){
