@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var fs = require("fs");
-require('./postg.js');
+var helper = require('./postg.js');
 
 
 app.get('/generateData',function(req,res){
@@ -91,7 +91,8 @@ app.post('/addNew', function(req,res){
 app.get('/poke',function(req, res){
     console.log('poking db...');
 
-    helper.getConn();
+    helper.gresHelper.getConn();
+    //helper.gresHelper.getEvents();
 
     });
 
