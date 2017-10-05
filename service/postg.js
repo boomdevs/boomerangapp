@@ -1,14 +1,31 @@
-const pg = require('pg');
+const { Pool, Client } =  require('pg')
 
-exports.gresHelper = (function(){
+var gresHelper = (function(){
     // declare private variables and/or functions.
 
 
 //jdbc:postgresql://X/boom
 //user = 
 //pw = 
+
+    var poolConn = function(){
+        const pool = new Pool({
+            user: 'boom',
+            host: '34.197.159.40',
+            database: 'boom',
+            password: 'boomboom2',
+            port: 5432,
+        })
+    
+        console.log('Trying to connect...');
+    
+        pool.query('SELECT NOW()', (err, res) => {
+            console.log(err, res)
+            pool.end()
+        })
+    }
     console.log("I started.");
-    var connString = "x:x@postgresql://X/boom"
+    var connString = "jdbc:postgresql://34.197.159.40:5432/boom"
     var client;
 
     var getConn = function(){
@@ -40,6 +57,8 @@ exports.gresHelper = (function(){
         
     // declare public variables and/or functions.
     
+    poolConn: poolConn,
+    
     getConn: getConn,
     
     getEvents:getEventsFromDb,
@@ -47,3 +66,5 @@ exports.gresHelper = (function(){
     }
 
 })();
+
+exports.gresHelper = gresHelper;
