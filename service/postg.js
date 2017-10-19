@@ -3,53 +3,47 @@ const { Pool, Client } =  require('pg')
 var gresHelper = (function(){
     // declare private variables and/or functions.
 
+    const tournament = "SELECT tournament_id, location_name, location_address, sanction_request_date, sanction_approval_date, " +
+       "tournamnet_start_date," +
+       "registration_time," +
+       "event_1_start_time," +
+       "rain_date," +
+       "rain_date_registration_time," +
+       "rain_date_event_1_start_time" +
+       "FROM public.tournament"
 
-//jdbc:postgresql://X/boom
-//user = 
-//pw = 
-
-    var poolConn = function(){
-        const pool = new Pool({
+    const pool = new Pool({
             user: 'boom',
             host: '34.197.159.40',
             database: 'boom',
-            password: 'boomboom2',
+            password: 'chris',
             port: 5432,
         })
     
+    var poolConn = function(){
+
+    
         console.log('Trying to connect...');
     
-        pool.query('SELECT NOW()', (err, res) => {
+        pool.query('SELECT event_id,name FROM public.event', (err, res) => {
             console.log(err, res)
             pool.end()
         })
     }
-    console.log("I started.");
-    var connString = "jdbc:postgresql://34.197.159.40:5432/boom"
-    var client;
 
-    var getConn = function(){
-        console.log(connString);
-        client = new pg.Client(connString);
-        client.connect();
-        console.log("connected.")
+    var getTournaments = async function(){
         
-    client.query('SELECT NOW() as now')
-      .then(res => console.log(res.rows[0]))
-      .catch(e => console.error(e.stack))
         
-    }
-    
-    var getEventsFromDb = function(){
-        var query = client.query("SELECT event_id,name FROM public.event");
         
-        query.on('row', function(row){
-            console.log(row);    
-        });
+        return await pool.query("SELECT tournament_id, location_name FROM public.tournament");
+        /*
+        pool.query("SELECT tournament_id, location_name FROM public.tournament", (err, res) => {
 
-        query.on('end', function(){
-            client.end();    
-        });
+            console.log(err, res.rows[0]);
+            //pool.end()
+            result = res;
+        })
+        */
 
     }
     
@@ -59,9 +53,7 @@ var gresHelper = (function(){
     
     poolConn: poolConn,
     
-    getConn: getConn,
-    
-    getEvents:getEventsFromDb,
+    getTournaments: getTournaments,
     
     }
 

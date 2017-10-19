@@ -2,11 +2,11 @@ const { Client } = require('pg');
 
 
 const client = new Client({
-  user: 'dbuser',
-  host: 'database.server.com',
-  database: 'mydb',
-  password: 'secretpassword',
-  port: 3211,
+  user: 'boom',
+  host: '34.197.159.40',
+  database: 'boom',
+  password: 'boomboom2',
+  port: 5432,
 })
 client.connect()
 
