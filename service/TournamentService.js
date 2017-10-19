@@ -27,9 +27,6 @@ app.get('/generateData',function(req,res){
         ]
    }
 
-   //I am typing.
-   //Me too
-
    var json = JSON.stringify(data);
    fs.writeFile("tournament.json",json, 'utf8',function(err,json){
        console.log("writing...");

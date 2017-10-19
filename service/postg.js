@@ -16,7 +16,7 @@ var gresHelper = (function(){
             user: 'boom',
             host: '34.197.159.40',
             database: 'boom',
-            password: 'chris',
+            password: '',
             port: 5432,
         })
     
@@ -32,7 +32,6 @@ var gresHelper = (function(){
     }
 
     var getTournaments = async function(){
-        
         
         
         return await pool.query("SELECT tournament_id, location_name FROM public.tournament");
