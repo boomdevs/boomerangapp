@@ -113,7 +113,6 @@ class Form extends React.Component {
           hasLabel='true'
           htmlFor='textInput'
           label='Address 2:'
-          required='false'
           type='text'
         />
 
@@ -130,7 +129,7 @@ class Form extends React.Component {
           htmlFor='textInput'
           label='State:'
           required='true'
-          type='text'
+          type='State'
         />
 
         <Input
@@ -138,7 +137,7 @@ class Form extends React.Component {
           htmlFor='textInput'
           label='Zip Code:'
           required='true'
-          type='text'
+          type='ZipCode'
         />
 
         <Input
@@ -154,7 +153,7 @@ class Form extends React.Component {
           htmlFor='emailInput'
           label='Email Address'
           required='true'
-          type='email'
+          type='Email'
         />
 
        <h2>Tournament Details</h2>
@@ -164,7 +163,7 @@ class Form extends React.Component {
           htmlFor='textInput'
           label='Tournament Date:'
           required='true'
-          type='text'
+          type='Date'
         />
 
         <Input
@@ -172,7 +171,7 @@ class Form extends React.Component {
           htmlFor='textInput'
           label='Tournament Rain Date:'
           required='true'
-          type='text'
+          type='Date'
         />
 
         <Input
@@ -187,7 +186,6 @@ class Form extends React.Component {
           hasLabel='true'
           htmlFor='textInput'
           label='Tournament Address 2:'
-          required='true'
           type='text'
         />
 
@@ -204,7 +202,7 @@ class Form extends React.Component {
           htmlFor='textInput'
           label='Tournament State:'
           required='true'
-          type='text'
+          type='State'
         />
 
         <Input
@@ -212,7 +210,7 @@ class Form extends React.Component {
           htmlFor='textInput'
           label='Tournament Zip:'
           required='true'
-          type='text'
+          type='ZipCode'
         />
 
         <Input
@@ -220,7 +218,7 @@ class Form extends React.Component {
           htmlFor='textInput'
           label='Registration Start Time:'
           required='true'
-          type='text'
+          type='Time'
         />
 
         <Input
@@ -228,7 +226,7 @@ class Form extends React.Component {
           htmlFor='textInput'
           label='Tournament Start Time:'
           required='true'
-          type='text'
+          type='Time'
         />
 
         <h3>Events</h3>
@@ -236,7 +234,7 @@ class Form extends React.Component {
           hasLabel='true'
           htmlFor='select'
           label='Event 1'
-          options='Accuracy 50, Accuracy 100, Australian Round, Australian Round, Endurance,  Fast Catch, GLORP, Individual Relay Trial, Juggling, Juggling - Five Minutes, Long Distance, Maximum Time Aloft 100, Maximum Time Aloft Unlimited, Trick Catch/Doubling'
+          options='Accuracy 50, Accuracy 100, Australian Round, Endurance,  Fast Catch, GLORP, Individual Relay Trial, Juggling, Juggling - Five Minutes, Long Distance, Maximum Time Aloft 100, Maximum Time Aloft Unlimited, Trick Catch/Doubling'
           required='true'
         />
 
@@ -244,40 +242,35 @@ class Form extends React.Component {
           hasLabel='true'
           htmlFor='select'
           label='Event 2'
-          options='Accuracy 50, Accuracy 100, Australian Round, Australian Round, Endurance,  Fast Catch, GLORP, Individual Relay Trial, Juggling, Juggling - Five Minutes, Long Distance, Maximum Time Aloft 100, Maximum Time Aloft Unlimited, Trick Catch/Doubling'
-          required='true'
+          options='Accuracy 50, Accuracy 100, Australian Round, Endurance,  Fast Catch, GLORP, Individual Relay Trial, Juggling, Juggling - Five Minutes, Long Distance, Maximum Time Aloft 100, Maximum Time Aloft Unlimited, Trick Catch/Doubling'
         />
 
         <Select
           hasLabel='true'
           htmlFor='select'
           label='Event 3'
-          options='Accuracy 50, Accuracy 100, Australian Round, Australian Round, Endurance,  Fast Catch, GLORP, Individual Relay Trial, Juggling, Juggling - Five Minutes, Long Distance, Maximum Time Aloft 100, Maximum Time Aloft Unlimited, Trick Catch/Doubling'
-          required='true'
+          options='Accuracy 50, Accuracy 100, Australian Round, Endurance,  Fast Catch, GLORP, Individual Relay Trial, Juggling, Juggling - Five Minutes, Long Distance, Maximum Time Aloft 100, Maximum Time Aloft Unlimited, Trick Catch/Doubling'
         />
 
         <Select
           hasLabel='true'
           htmlFor='select'
           label='Event 4'
-          options='Accuracy 50, Accuracy 100, Australian Round, Australian Round, Endurance,  Fast Catch, GLORP, Individual Relay Trial, Juggling, Juggling - Five Minutes, Long Distance, Maximum Time Aloft 100, Maximum Time Aloft Unlimited, Trick Catch/Doubling'
-          required='true'
+          options='Accuracy 50, Accuracy 100, Australian Round, Endurance,  Fast Catch, GLORP, Individual Relay Trial, Juggling, Juggling - Five Minutes, Long Distance, Maximum Time Aloft 100, Maximum Time Aloft Unlimited, Trick Catch/Doubling'
         />
 
         <Select
           hasLabel='true'
           htmlFor='select'
           label='Event 5'
-          options='Accuracy 50, Accuracy 100, Australian Round, Australian Round, Endurance,  Fast Catch, GLORP, Individual Relay Trial, Juggling, Juggling - Five Minutes, Long Distance, Maximum Time Aloft 100, Maximum Time Aloft Unlimited, Trick Catch/Doubling'
-          required='true'
+          options='Accuracy 50, Accuracy 100, Australian Round, Endurance,  Fast Catch, GLORP, Individual Relay Trial, Juggling, Juggling - Five Minutes, Long Distance, Maximum Time Aloft 100, Maximum Time Aloft Unlimited, Trick Catch/Doubling'
         />
 
         <Select
           hasLabel='true'
           htmlFor='select'
           label='Event 6'
-          options='Accuracy 50, Accuracy 100, Australian Round, Australian Round, Endurance,  Fast Catch, GLORP, Individual Relay Trial, Juggling, Juggling - Five Minutes, Long Distance, Maximum Time Aloft 100, Maximum Time Aloft Unlimited, Trick Catch/Doubling'
-          required='true'
+          options='Accuracy 50, Accuracy 100, Australian Round, Endurance,  Fast Catch, GLORP, Individual Relay Trial, Juggling, Juggling - Five Minutes, Long Distance, Maximum Time Aloft 100, Maximum Time Aloft Unlimited, Trick Catch/Doubling'
         />
 
         <h3>Head Judge Nominees</h3>
@@ -310,7 +303,6 @@ class Form extends React.Component {
           hasLabel='true'
           htmlFor='textInput'
           label='Judge Nominee 4:'
-          required='true'
           type='text'
         />
 
@@ -318,7 +310,6 @@ class Form extends React.Component {
           hasLabel='true'
           htmlFor='textInput'
           label='Judge Nominee 5:'
-          required='true'
           type='text'
         />
 

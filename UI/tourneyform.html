@@ -3,7 +3,7 @@
 <title>USBA Tournament Sanctioning Request</title>
 <body>
 <center><h1>USBA Tournament Sanctioning Request</h1></center>
-<form action="/action_page.php">
+<form action="/action_page.php" enctype="multipart/form-data" method="post">
   <fieldset>
     <legend><h2>Tournament Director Contact Information</h2></legend>
     Name:
@@ -13,20 +13,20 @@
     <input type="text" name="address1">
     <br>
     Address 2:
-    <input type="text" name="address2">    
+    <input type="text" name="address2">
     <br>
     City:
-    <input type="text" name="city"> 
+    <input type="text" name="city">
     State:
-    <input type="text" name="state">  
+    <input type="text" name="state">
     Zip Code:
-    <input type="text" name="zip">   
+    <input type="text" name="zip">
     <br>
     Telephone Number:
-    <input type="text" name="telephone">    
+    <input type="text" name="telephone">
     <br>
     Email Address:
-    <input type="email" name="email">    
+    <input type="email" name="email">
   </fieldset>
 <br>
   <fieldset>
@@ -38,20 +38,20 @@
     <input type="date" name="raindate">
     <br>
     Address 1:
-    <input type="text" name="tourneyaddress1">    
+    <input type="text" name="tourneyaddress1">
     <br>
     Address 2:
-    <input type="text" name="tourneyaddress2">    
+    <input type="text" name="tourneyaddress2">
     <br>
     City:
-    <input type="text" name="tourneycity"> 
+    <input type="text" name="tourneycity">
     State:
-    <input type="text" name="tourneystate">  
+    <input type="text" name="tourneystate">
     Zip Code:
-    <input type="text" name="tourneyzip">   
+    <input type="text" name="tourneyzip">
     <br>
     Registration Start Time:
-    <input type="time" name="registrationstart">    
+    <input type="time" name="registrationstart">
     Tournament Start Time:
     <input type="time" name="tourneystart">
     <br><br>
@@ -209,7 +209,7 @@
       <option value="mtaunlimited">Maximum Time Aloft Unlimited</option>
       <option value="trickcatchdoubling">Trick Catch/Doubling</option>
     </select>
-    </td> 
+    </td>
      <td>
     1.
     <select name="day2event1">
@@ -813,7 +813,7 @@
     <input type="text" name="judge6">
     <br>
   </fieldset>
-  
+
 <br>
   <input type="submit" value="Submit">
 </form>
