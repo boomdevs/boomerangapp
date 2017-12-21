@@ -13,9 +13,9 @@ var gresHelper = (function(){
        "FROM public.tournament"
 
     const pool = new Pool({
-            user: 'boom',
-            host: '34.197.159.40',
-            database: 'boom',
+            user: '',
+            host: '',
+            database: '',
             password: '',
             port: 5432,
         })

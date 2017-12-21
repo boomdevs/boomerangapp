@@ -44,8 +44,8 @@ app.get('/tournaments',function(req, res){
     });
     
     function output(data){
-        console.log("controller got = " + data);
-        res.json(data)
+        console.log("controller got = " + JSON.stringify(data));
+        res.end(JSON.stringify(data));
     }
     
     /*
