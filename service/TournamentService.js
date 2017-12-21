@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var fs = require("fs");
-var helper = require('./postg.js');
+var helper = require('./postg.js').gresHelper;
 
 
 app.get('/generateData',function(req,res){
@@ -27,9 +27,6 @@ app.get('/generateData',function(req,res){
         ]
    }
 
-   //I am typing.
-   //Me too
-
    var json = JSON.stringify(data);
    fs.writeFile("tournament.json",json, 'utf8',function(err,json){
        console.log("writing...");
@@ -38,15 +35,29 @@ app.get('/generateData',function(req,res){
 
 });
 
-app.get('/getAllTournaments',function(req, res){
+app.get('/tournaments',function(req, res){
+    
+    var result = helper.getTournaments().then(function(data){
+        
+        output(data);
+        
+    });
+    
+    function output(data){
+        console.log("controller got = " + JSON.stringify(data));
+        res.end(JSON.stringify(data));
+    }
+    
+    /*
     fs.readFile("tournament.json", 'utf8', function(err, data){
         var json = JSON.parse(data);
        console.log(json);
        res.end(data);
     });
+    */
+})
 
-
-app.get('/makeNewTournament',function(req, res){
+app.post('/tournaments',function(req, res){
 
     fs.readFile("tournament.json", 'utf8', function(err,data){
 
@@ -56,8 +67,8 @@ app.get('/makeNewTournament',function(req, res){
        console.log("poked.");
        res.status(200).send("Poked.");
 
-    });
-})
+});
+
 
 app.post('/addNew', function(req,res){
     
@@ -91,9 +102,9 @@ app.post('/addNew', function(req,res){
 app.get('/poke',function(req, res){
     console.log('poking db...');
 
-    helper.gresHelper.getConn();
+    helper.getTournaments();
     //helper.gresHelper.getEvents();
-
+    res.status(200).send("Poked.");
     });
 
 var server = app.listen(8080, function(){
