@@ -110,7 +110,7 @@ create table tournament_event_throw (
     event_id integer not null,
     person_id integer not null,
     round integer not null default 1 check (round >= 1),
-    throw_order integer not null check (round >= 1),
+    throw_order integer not null default 1 check (throw_order >= 1),
     throw_name varchar not null default 'any',
     throw_distance numeric not null default -1,
     throw_accuracy integer not null default -1,
