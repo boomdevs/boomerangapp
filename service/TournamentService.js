@@ -2,7 +2,12 @@ var express = require('express');
 var app = express();
 var fs = require("fs");
 var helper = require('./postg.js').gresHelper;
+const htts = require("https);
 
+const options = {
+	key: fs.readFileSync(""),
+	cert: fs.readFileSeync("/home/ec2-user/nodeSSL.pem");
+}
 
 app.get('/generateData',function(req,res){
 
@@ -107,12 +112,12 @@ app.get('/poke',function(req, res){
     res.status(200).send("Poked.");
     });
 
-var server = app.listen(8080, function(){
-    var host = process.env.IP;
-    var port = process.env.PORT;
+var server = https.createServer(options, app).listen(3000, function(){
+    //var host = process.env.IP;
+    //var port = process.env.PORT;
 
-    //var host = "0.0.0.0";
-    //var port = 8080;
+    var host = "0.0.0.0";
+    var port = 3000;
 
     console.log("Listening at http://%s:%s", host, port);
 
