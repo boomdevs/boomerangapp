@@ -14,6 +14,8 @@ create table tournament (
     tournament_id serial,
     location_name varchar not null,
     location_address varchar not null,
+    location_city varchar not null,
+    location_state varchar not nulls,
     sanction_request_date date,
     sanction_approval_date date,
     tournamnet_start_date date not null,
