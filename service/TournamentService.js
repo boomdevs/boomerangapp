@@ -2,11 +2,17 @@ var express = require('express');
 var app = express();
 var fs = require("fs");
 var helper = require('./postg.js').gresHelper;
-const htts = require("https);
+const https = require("https");
+var bodyParser = require('body-parser');
+
+var cors = require('cors');
+
+app.use(bodyParser.json());
+app.use(cors());
 
 const options = {
 	key: fs.readFileSync(""),
-	cert: fs.readFileSeync("/home/ec2-user/nodeSSL.pem");
+	cert: fs.readFileSync("")
 }
 
 app.get('/generateData',function(req,res){
@@ -40,7 +46,7 @@ app.get('/generateData',function(req,res){
 
 });
 
-app.get('/tournaments',function(req, res){
+app.get('/tournaments',function(req, res, next){
     
     var result = helper.getTournaments().then(function(data){
         
@@ -104,7 +110,10 @@ app.post('/addNew', function(req,res){
 
 })
 
-app.get('/poke',function(req, res){
+app.post('/poke',function(req, res){
+
+    console.log(req.body);
+
     console.log('poking db...');
 
     helper.getTournaments();
