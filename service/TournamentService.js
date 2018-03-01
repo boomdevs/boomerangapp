@@ -2,7 +2,18 @@ var express = require('express');
 var app = express();
 var fs = require("fs");
 var helper = require('./postg.js').gresHelper;
+const https = require("https");
+var bodyParser = require('body-parser');
 
+var cors = require('cors');
+
+app.use(bodyParser.json());
+app.use(cors());
+
+const options = {
+	key: fs.readFileSync(""),
+	cert: fs.readFileSync("")
+}
 
 app.get('/generateData',function(req,res){
 
@@ -35,7 +46,7 @@ app.get('/generateData',function(req,res){
 
 });
 
-app.get('/tournaments',function(req, res){
+app.get('/tournaments',function(req, res, next){
     
     var result = helper.getTournaments().then(function(data){
         
@@ -99,7 +110,10 @@ app.post('/addNew', function(req,res){
 
 })
 
-app.get('/poke',function(req, res){
+app.post('/poke',function(req, res){
+
+    console.log(req.body);
+
     console.log('poking db...');
 
     helper.getTournaments();
@@ -107,12 +121,12 @@ app.get('/poke',function(req, res){
     res.status(200).send("Poked.");
     });
 
-var server = app.listen(8080, function(){
-    var host = process.env.IP;
-    var port = process.env.PORT;
+var server = https.createServer(options, app).listen(3000, function(){
+    //var host = process.env.IP;
+    //var port = process.env.PORT;
 
-    //var host = "0.0.0.0";
-    //var port = 8080;
+    var host = "0.0.0.0";
+    var port = 3000;
 
     console.log("Listening at http://%s:%s", host, port);
 
