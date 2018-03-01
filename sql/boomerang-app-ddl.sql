@@ -77,7 +77,7 @@ create index tournament_event_event_id_in on tournament_event (event_id);
 
 ---------------------------------------------------------------------------------
 
-create table tournament_event_score (
+create table tournament_event_person (
     tournament_id integer not null,
     event_id integer not null,
     person_id integer not null,
@@ -85,6 +85,54 @@ create table tournament_event_score (
     primary key(tournament_id, event_id, person_id),
     foreign key(tournament_id, event_id) references tournament_event (tournament_id, event_id),
     foreign key(tournament_id, person_id, role) references tournament_person (tournament_id, person_id, role)
+);
+
+create index tournament_event_person_event_id_in on tournament_event_person (event_id);
+create index tournament_event_person_person_id_in on tournament_event_person (person_id);
+
+---------------------------------------------------------------------------------
+
+create table event_points (
+     event_id integer not null,
+     throw_name varchar not null default 'any',
+     throw_distance numeric not null default -1,
+     throw_accuracy integer not null default -1,
+     throw_caught boolean not null,
+     points integer not null default -1,
+     primary key(event_id, throw_name, throw_distance, throw_accuracy, throw_caught),
+     foreign key(event_id) references event (event_id)
+);
+
+---------------------------------------------------------------------------------
+
+create table tournament_event_throw (
+    tournament_id integer not null,
+    event_id integer not null,
+    person_id integer not null,
+    round integer not null default 1 check (round >= 1),
+    throw_order integer not null check (round >= 1),
+    throw_name varchar not null default 'any',
+    throw_distance numeric not null default -1,
+    throw_accuracy integer not null default -1,
+    throw_time numeric not null default -1,
+    throw_caught boolean not null,
+    primary key(tournament_id, event_id, person_id, round, throw_order),
+    foreign key(tournament_id, event_id, person_id) references tournament_event_person (tournament_id, event_id, person_id)
+);
+
+create index tournament_event_throw_event_id_in on tournament_event_throw (event_id);
+create index tournament_event_throw_person_id_in on tournament_event_throw (person_id);
+
+---------------------------------------------------------------------------------
+
+create table tournament_event_score (
+    tournament_id integer not null,
+    event_id integer not null,
+    person_id integer not null,
+    score numeric not null,
+    score_notes varchar,
+    primary key(tournament_id, event_id, person_id),
+    foreign key(tournament_id, event_id, person_id) references tournament_event_person (tournament_id, event_id, person_id)
 );
 
 create index tournament_event_score_event_id_in on tournament_event_score (event_id);
