@@ -48,25 +48,19 @@ app.get('/tournaments',function(req, res){
         res.end(JSON.stringify(data));
     }
     
-    /*
-    fs.readFile("tournament.json", 'utf8', function(err, data){
-        var json = JSON.parse(data);
-       console.log(json);
-       res.end(data);
-    });
-    */
 })
 
 app.post('/tournaments',function(req, res){
 
-    fs.readFile("tournament.json", 'utf8', function(err,data){
-
-        console.log(data);
+    var data = req.data();
+    
+    console.log(data);
+    
+/*
+    var result = helper.createTournament(req.data).then(function(data){
+       output(data); 
     });
-
-       console.log("poked.");
-       res.status(200).send("Poked.");
-
+*/
 });
 
 
@@ -100,6 +94,9 @@ app.post('/addNew', function(req,res){
 })
 
 app.get('/poke',function(req, res){
+    
+    console.log(req.body);
+    
     console.log('poking db...');
 
     helper.getTournaments();
