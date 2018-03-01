@@ -4,15 +4,15 @@ var fs = require("fs");
 var helper = require('./postg.js').gresHelper;
 const https = require("https");
 var bodyParser = require('body-parser');
-
 var cors = require('cors');
+var config = require('config');
 
 app.use(bodyParser.json());
 app.use(cors());
 
 const options = {
-	key: fs.readFileSync(""),
-	cert: fs.readFileSync("")
+	key: fs.readFileSync(config.Keystore.key),
+	cert: fs.readFileSync(config.Keystore.cert)
 }
 
 app.get('/generateData',function(req,res){

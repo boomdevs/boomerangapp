@@ -1,3 +1,4 @@
+var config=require('config');
 const { Pool, Client } =  require('pg')
 
 var gresHelper = (function(){
@@ -30,11 +31,11 @@ var gresHelper = (function(){
         "RETURNING tournament_id"
 
     const pool = new Pool({
-            user: '',
-            host: '',
-            database: '',
-            password: '',
-            port: 5432,
+            user: config.Database.user,
+            host: config.Database.host,
+            database: config.Database.database,
+            password: config.Database.password,
+            port: config.Database.port,
         })
     
     var poolConn = function(){

@@ -1,0 +1,16 @@
+//Configuration file for Tournament Service.
+//	C. Devers, 28 FEB 2018
+
+{
+	"Database": {
+		user:'',
+		host:'',
+		database:'',
+		password:'',
+		port: 
+	},
+	"Keystore": {
+		key: '',
+		cert: ''
+	}
+}
