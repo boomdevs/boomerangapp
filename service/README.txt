@@ -10,29 +10,38 @@ https://nodejs.org/en/
 
     npm install express --save
 
-5) Also inside that directory, install the PostGres client and connection pool packages.
+5) Also inside that directory, install the packages the services is dependent on.
+
+	//TODO:  This should be done by package.json...  eventually.
 
 	npm install pg-pool
 	npm install pg
+	npm install fs
+	npm install https
+	npm install body-parser
+	npm install cors
+	npm install config
+
+6) Find the configuration example in the service/config folder (exampleConfig.json) and make a new version of it, called default.json, filled in with the appropriate information.  Do not save the example configuration file with actual configuration data in it.
     
-6) Use NodeJS to run the service itself.
+7) Use NodeJS to run the service itself.
 
     node TournamentService.js
     
-7) The service should be running on the configured at the configured port.
+8) The service should be running on the configured at the configured port.
 
     You should see something like...
     
     Listening at http://0.0.0.0:8080
 
-8) Browse to the service with a browser, using the "/generateData" endpoint to initialize the test data.
+9) Browse to the service with a browser, using the "/generateData" endpoint to initialize the test data.
 
     http://localhost:8080/generateData
 
-9) browse to the service again, using the "/getAllTournaments" endpoint to see if it actually worked.
+10) browse to the service again, using the "/getAllTournaments" endpoint to see if it actually worked.
 
     http://localhost:8080/getAllTournaments
 
     You should see data in your browser.
     
-10) Have a beer.  Preferablly a good one.
+11) Have a beer.  Preferablly a good one.
