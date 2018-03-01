@@ -55,9 +55,11 @@ var gresHelper = (function(){
 
     }
     
-    var createTournament = async function(){
+    var createTournament = async function(input){
         
-        return await pool.query("");
+        var values = {input.location_name, input.location_address, "", "", "", "", "", "", "", "", "", ""}
+        
+        return await pool.query(insertTournament,values)
         
     }
     
