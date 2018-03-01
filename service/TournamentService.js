@@ -4,8 +4,8 @@ var fs = require("fs");
 var helper = require('./postg.js').gresHelper;
 const https = require("https");
 var bodyParser = require('body-parser');
+
 var cors = require('cors');
-var config = require('config');
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -55,7 +55,10 @@ app.get('/tournaments',function(req, res, next){
     });
     
     function output(data){
+        //outputing to the console...  AWS... 
         console.log("controller got = " + JSON.stringify(data));
+        
+        //output to HTTP response... goes to web client.
         res.end(JSON.stringify(data));
     }
     
@@ -63,15 +66,15 @@ app.get('/tournaments',function(req, res, next){
 
 app.post('/tournaments',function(req, res){
 
-    var data = req.data();
+    var input = req.body;
     
-    console.log(data);
+    console.log(input);
     
-/*
-    var result = helper.createTournament(req.data).then(function(data){
-       output(data); 
+    var result = helper.createTournament(input).then(function(data){
+       console.log("New Tournament ID = " + data);
+       res.end(data); 
     });
-*/
+
 });
 
 
