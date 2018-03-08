@@ -4,7 +4,7 @@ var fs = require("fs");
 var helper = require('./postg.js').gresHelper;
 const https = require("https");
 var bodyParser = require('body-parser');
-
+var config = require('config');
 var cors = require('cors');
 
 app.use(bodyParser.json());
