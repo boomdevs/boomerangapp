@@ -18,12 +18,12 @@ create table tournament (
     location_state varchar not null,
     sanction_request_date date,
     sanction_approval_date date,
-    tournamnet_start_date date not null,
-    registration_time timestamp with time zone,
-    event_1_start_time timestamp with time zone,
+    tournament_start_date date not null,
+    registration_time time,
+    event_1_start_time time,
     rain_date date,
-    rain_date_registration_time timestamp with time zone,
-    rain_date_event_1_start_time timestamp with time zone,
+    rain_date_registration_time time,
+    rain_date_event_1_start_time time,
     primary key(tournament_id)
 );
 
