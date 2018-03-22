@@ -1,3 +1,4 @@
+drop table if exists person cascade;
 create table person (
     person_id serial,
     first_name varchar not null,
@@ -10,6 +11,7 @@ create table person (
 
 ---------------------------------------------------------------------------------
 
+drop table if exists tournament cascade;
 create table tournament (
     tournament_id serial,
     location_name varchar not null,
@@ -29,6 +31,7 @@ create table tournament (
 
 ---------------------------------------------------------------------------------
 
+drop table if exists tournament_person cascade;
 create table tournament_person (
     tournament_id integer not null,
     person_id integer not null,
@@ -42,6 +45,7 @@ create index tournament_person_period_id_in on tournament_person (person_id);
 
 ---------------------------------------------------------------------------------
 
+drop table if exists event cascade;
 create table event (
     event_id serial,
     name varchar not null,
@@ -65,6 +69,7 @@ insert into event (name) values ('Fast Catch');
 
 ---------------------------------------------------------------------------------
 
+drop table if exists tournament_event cascade;
 create table tournament_event (
     tournament_id integer not null,
     event_id integer not null,
@@ -79,6 +84,7 @@ create index tournament_event_event_id_in on tournament_event (event_id);
 
 ---------------------------------------------------------------------------------
 
+drop table if exists tournament_event_person cascade;
 create table tournament_event_person (
     tournament_id integer not null,
     event_id integer not null,
@@ -94,6 +100,7 @@ create index tournament_event_person_person_id_in on tournament_event_person (pe
 
 ---------------------------------------------------------------------------------
 
+drop table if exists event_points cascade;
 create table event_points (
      event_id integer not null,
      throw_name varchar not null default 'any',
@@ -107,6 +114,7 @@ create table event_points (
 
 ---------------------------------------------------------------------------------
 
+drop table if exists tournament_event_throw cascade;
 create table tournament_event_throw (
     tournament_id integer not null,
     event_id integer not null,
@@ -127,6 +135,7 @@ create index tournament_event_throw_person_id_in on tournament_event_throw (pers
 
 ---------------------------------------------------------------------------------
 
+drop table if exists tournament_event_score cascade;
 create table tournament_event_score (
     tournament_id integer not null,
     event_id integer not null,
