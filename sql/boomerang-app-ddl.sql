@@ -14,6 +14,7 @@ create table person (
 drop table if exists tournament cascade;
 create table tournament (
     tournament_id serial,
+    tournament_name varchar(1000),
     location_name varchar not null,
     location_address varchar not null,
     location_city varchar not null,
