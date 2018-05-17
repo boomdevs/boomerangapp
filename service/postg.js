@@ -55,6 +55,10 @@ var gresHelper = (function(){
 
     }
     
+    var getTournament = async function(id){
+        return await pool.query("SELECT location_name, location_address, location_city, location_state FROM public.tournament where tournament_id = ?", id);
+    }
+    
     var createTournament = async function(input){
         var now = new Date();
         var values = [input.location_name, input.location_address, input.location_city, input.location_state, now, now, input.tournament_start_date, input.registration_start_time, input.event_1_start_time, input.rain_date, input.rain_date_registration_time, input.rain_date_event_1_start_time]
@@ -70,6 +74,8 @@ var gresHelper = (function(){
     poolConn: poolConn,
     
     getTournaments: getTournaments,
+    
+    getTournament: getTournament,
     
     createTournament: createTournament,
     

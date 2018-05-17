@@ -48,11 +48,16 @@ app.get('/generateData',function(req,res){
 
 app.get('/tournaments',function(req, res, next){
     
-    var result = helper.getTournaments().then(function(data){
-        
-        output(data);
-        
-    });
+    
+    if(req.query.id){
+        var result = helper.getTournament(req.query.id).then(function(data){
+            output(data);
+        });
+    }else{
+        var result = helper.getTournaments().then(function(data){
+            output(data);
+        });
+    }
     
     function output(data){
         //outputing to the console...  AWS... 
