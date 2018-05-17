@@ -14,21 +14,20 @@ var gresHelper = (function(){
        "FROM public.tournament"
        
     const insertTournament = "insert into tournament(" +
-	"tournament_id," +
         "location_name," +
         "location_address," +
-//        "location_city," +
-//        "location_state," +
+        "location_city," +
+        "location_state," +
         "sanction_request_date," +
         "sanction_approval_date," +
-        "tournamnet_start_date," +
+        "tournament_start_date," +
         "registration_time," +
         "event_1_start_time," +
         "rain_date," +
         "rain_date_registration_time," +
         "rain_date_event_1_start_time" +
         ")" +
-        "values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)" +
+        "values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)" +
         "RETURNING tournament_id"
 
     const pool = new Pool({
@@ -58,7 +57,7 @@ var gresHelper = (function(){
     
     var createTournament = async function(input){
         var now = new Date();
-        var values = [8, input.location_name, input.location_address, now, now, now, now, now, now, now, now]
+        var values = [input.location_name, input.location_address, input.location_city, input.location_state, now, now, input.tournament_start_date, input.registration_start_time, input.event_1_start_time, input.rain_date, input.rain_date_registration_time, input.rain_date_event_1_start_time]
         
         return await pool.query(insertTournament,values)
         

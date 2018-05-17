@@ -70,9 +70,10 @@ app.post('/tournaments',function(req, res){
     
     console.log(input);
     
-    var result = helper.createTournament(input).then(function(data){
-       console.log("New Tournament ID = " + data);
-       res.end(data); 
+    helper.createTournament(input).then(function(data){
+       console.log("Inserted new tournament with ID = " + JSON.stringify(data.rows[0].tournament_id));
+	var result = data.rows[0].tournament_id;
+       res.end(JSON.stringify(result));
     });
 
 });
