@@ -50,10 +50,12 @@ app.get('/tournaments',function(req, res, next){
     
     
     if(req.query.id){
+	console.log("Getting tournament id = " + req.query.id);
         var result = helper.getTournament(req.query.id).then(function(data){
             output(data);
         });
     }else{
+	console.log("Getting all tournaments.");
         var result = helper.getTournaments().then(function(data){
             output(data);
         });

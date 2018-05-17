@@ -56,7 +56,7 @@ var gresHelper = (function(){
     }
     
     var getTournament = async function(id){
-        return await pool.query("SELECT location_name, location_address, location_city, location_state FROM public.tournament where tournament_id = ?", id);
+        return await pool.query("SELECT location_name, location_address, location_city, location_state FROM public.tournament where tournament_id = $1",[id]);
     }
     
     var createTournament = async function(input){
