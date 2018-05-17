@@ -4,8 +4,8 @@ var fs = require("fs");
 var helper = require('./postg.js').gresHelper;
 const https = require("https");
 var bodyParser = require('body-parser');
-var cors = require('cors');
 var config = require('config');
+var cors = require('cors');
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -48,14 +48,24 @@ app.get('/generateData',function(req,res){
 
 app.get('/tournaments',function(req, res, next){
     
-    var result = helper.getTournaments().then(function(data){
-        
-        output(data);
-        
-    });
+    
+    if(req.query.id){
+	console.log("Getting tournament id = " + req.query.id);
+        var result = helper.getTournament(req.query.id).then(function(data){
+            output(data);
+        });
+    }else{
+	console.log("Getting all tournaments.");
+        var result = helper.getTournaments().then(function(data){
+            output(data);
+        });
+    }
     
     function output(data){
+        //outputing to the console...  AWS... 
         console.log("controller got = " + JSON.stringify(data));
+        
+        //output to HTTP response... goes to web client.
         res.end(JSON.stringify(data));
     }
     
@@ -63,15 +73,16 @@ app.get('/tournaments',function(req, res, next){
 
 app.post('/tournaments',function(req, res){
 
-    var data = req.data();
+    var input = req.body;
     
-    console.log(data);
+    console.log(input);
     
-/*
-    var result = helper.createTournament(req.data).then(function(data){
-       output(data); 
+    helper.createTournament(input).then(function(data){
+       console.log("Inserted new tournament with ID = " + JSON.stringify(data.rows[0].tournament_id));
+	var result = data.rows[0].tournament_id;
+       res.end(JSON.stringify(result));
     });
-*/
+
 });
 
 
