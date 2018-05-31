@@ -68,7 +68,7 @@ var gresHelper = (function(){
                                        "event_1_start_time,"+
                                        "rain_date,"+
                                        "rain_date_registration_time,"+
-                                       "rain_date_event_1_start_time FROM public.tournament where tournament_id = ?", id);
+                                       "rain_date_event_1_start_time FROM public.tournament where tournament_id = $1", [id]);
     }
     
     var createTournament = async function(input){
