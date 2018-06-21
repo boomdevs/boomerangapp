@@ -56,7 +56,19 @@ var gresHelper = (function(){
     }
     
     var getTournament = async function(id){
-        return await pool.query("SELECT location_name, location_address, location_city, location_state FROM public.tournament where tournament_id = $1",[id]);
+                return await pool.query("SELECT tournament_id,"+
+                                       "location_name,"+
+                                       "location_address,"+
+                                       "location_city,"+
+                                       "location_state,"+
+                                       "sanction_request_date,"+
+                                       "sanction_approval_date,"+
+                                       "tournament_start_date,"+
+                                       "registration_time,"+
+                                       "event_1_start_time,"+
+                                       "rain_date,"+
+                                       "rain_date_registration_time,"+
+                                       "rain_date_event_1_start_time FROM public.tournament where tournament_id = $1", [id]);
     }
     
     var createTournament = async function(input){
