@@ -86,7 +86,7 @@ const updateTournament = "update public.tournament set " +
     }
     
     var changeTournament = async function(input){
-        var values = [input.location_city, input.location_state, input.id]
+        var values = [input.location_city, input.location_state, input.tournament_id]
         
         return await pool.query(updateTournament, values)
     }
