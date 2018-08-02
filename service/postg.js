@@ -1,5 +1,5 @@
 var config=require('config');
-const { Pool, Client } =  require('pg')
+const { Pool } =  require('pg')
 
 var gresHelper = (function(){
     // declare private variables and/or functions.
@@ -86,38 +86,25 @@ const updateTournament = "update public.tournament set " +
     }
     
     var changeTournament = async function(input){
-        pool.connect((err, client, done) =>{
-            const shouldAbort = (err) => {
-                if (err) {
-                    console.error('Error in transaction', err.stack)
-                    client.query('ROLLBACK', (err) => {
-                        if (err) {
-                        console.error('Error rolling back client', err.stack)
-                        }
-                        // release the client back to the pool
-                        done()
-                    })
-                }
-            return !!err
-            }
 
+        const client = await pool.connect()
+        
+        try {
             var values = [input.location_city, input.location_state, input.tournament_id]
-  
-            client.query(updateTournament, values, (err, res) => {
-               if (shouldAbort(err)) return
-               
-               client.query('COMMIT', (err) => {
-                   if (err) {
-                       console.error('Error committing transaction on update tournament.', err.stack)
-                   }
-                   done()
-               })
-               
-            });
-  
-        })
+            await client.query('BEGIN')
+            await client.query(updateTournament, values)
+            await client.query('COMMIT')
+        }catch(e){
+            await client.query('ROLLBACK')
+            throw e
+        }finally{
+            client.release()
+        }
 
-        return true
+            
+  
+
+        return await pool.query(getTournament,input.tournament_id)
     }
     
     return{
