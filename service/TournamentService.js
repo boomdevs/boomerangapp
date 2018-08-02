@@ -77,12 +77,19 @@ app.post('/tournaments',function(req, res){
     
     console.log(input);
     
-    helper.createTournament(input).then(function(data){
-       console.log("Inserted new tournament with ID = " + JSON.stringify(data.rows[0].tournament_id));
-	var result = data.rows[0].tournament_id;
-       res.end(JSON.stringify(result));
-    });
-
+    if(input.tournament_id){
+        helper.createTournament(input).then(function(data){
+           console.log("Updating tournament with ID = " + input.tournament_id);
+    	var result = data.rows[0];
+           res.end(JSON.stringify(result));
+        });
+    }else{
+        helper.createTournament(input).then(function(data){
+           console.log("Inserted new tournament with ID = " + JSON.stringify(data.rows[0].tournament_id));
+    	var result = data.rows[0].tournament_id;
+           res.end(JSON.stringify(result));
+        });
+    }
 });
 
 

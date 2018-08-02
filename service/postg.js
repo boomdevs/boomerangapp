@@ -30,6 +30,12 @@ var gresHelper = (function(){
         "values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)" +
         "RETURNING tournament_id"
 
+const updateTournament = "update public.tournament set " +
+        "location_city = $1," +
+        "location_state = $2" +
+        "where tournament_id = $3"
+
+
     const pool = new Pool({
             user: config.Database.user,
             host: config.Database.host,
@@ -79,6 +85,12 @@ var gresHelper = (function(){
         
     }
     
+    var changeTournament = async function(input){
+        var values = [input.id, input.location_city, input.location_state]
+        
+        return await pool.query(updateTournament, values)
+    }
+    
     return{
         
     // declare public variables and/or functions.
@@ -90,6 +102,8 @@ var gresHelper = (function(){
     getTournament: getTournament,
     
     createTournament: createTournament,
+    
+    changeTournament: changeTournament,
     
     }
 
