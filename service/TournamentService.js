@@ -78,7 +78,7 @@ app.post('/tournaments',function(req, res){
     console.log(input);
     
     if(input.tournament_id){
-        helper.createTournament(input).then(function(data){
+        helper.changeTournament(input).then(function(data){
            console.log("Updating tournament with ID = " + input.tournament_id);
     	var result = data.rows[0];
            res.end(JSON.stringify(result));

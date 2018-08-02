@@ -93,6 +93,7 @@ class EditTournamentForm extends React.Component{
         };
         updateText = updateText.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
     
     onChange(e) {
@@ -117,8 +118,16 @@ class EditTournamentForm extends React.Component{
     }
 
     handleSubmit(event){
-        alert("I am handling your submit.");
+        console.log("I am handling your submit.");
         event.preventDefault();
+        console.log("updated data to send = " + JSON.stringify(this.state));
+        axios.post('https://sabrie.com:3000/tournaments', this.state)
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
     
 
