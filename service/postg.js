@@ -86,11 +86,38 @@ const updateTournament = "update public.tournament set " +
     }
     
     var changeTournament = async function(input){
-        var values = [input.location_city, input.location_state, input.tournament_id]
-        
-        await pool.query(updateTournament, values)
+        pool.connect((err, client, done) =>{
+            const shouldAbort = (err) => {
+                if (err) {
+                    console.error('Error in transaction', err.stack)
+                    client.query('ROLLBACK', (err) => {
+                        if (err) {
+                        console.error('Error rolling back client', err.stack)
+                        }
+                        // release the client back to the pool
+                        done()
+                    })
+                }
+            return !!err
+            }
 
-        return await pool.query('COMMIT')
+            var values = [input.location_city, input.location_state, input.tournament_id]
+  
+            client.query(updateTournament, values, (err, res) => {
+               if (shouldAbort(err)) return
+               
+               client.query('COMMIT', (err) => {
+                   if (err) {
+                       console.error('Error committing transaction on update tournament.', err.stack)
+                   }
+                   done()
+               })
+               
+            });
+  
+        })
+
+        return true
     }
     
     return{
