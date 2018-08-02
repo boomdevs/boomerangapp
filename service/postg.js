@@ -33,7 +33,7 @@ var gresHelper = (function(){
 const updateTournament = "update public.tournament set " +
         "location_city = $1," +
         "location_state = $2" +
-        "where tournament_id = $3"
+        "where tournament_id = $3; commit;"
 
 
     const pool = new Pool({

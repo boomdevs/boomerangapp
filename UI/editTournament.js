@@ -80,6 +80,7 @@ class EditTournamentForm extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
+            tournament_id: 0,
             location_name: 'A Place!',
             location_address: 'I want cookies.',
             location_city: "Cookie City",
@@ -114,7 +115,7 @@ class EditTournamentForm extends React.Component{
         this.setState({
             [name]: value
         });
-        console.log("state is now " + this.state[name])
+        console.log("state is now " + this.state[name]);
     }
 
     handleSubmit(event){
@@ -132,6 +133,7 @@ class EditTournamentForm extends React.Component{
     
 
     render() {
+        console.log("rendering id: " + this.state.tournament_id);
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
@@ -184,7 +186,7 @@ class EditTournamentForm extends React.Component{
                         </tbody>
                     </table>
                     
-                    <input type="submit" value="Submit" class="button" />
+                    <input type="submit" value="Submit" className="button" />
                     
                 </form>
             </div>            
