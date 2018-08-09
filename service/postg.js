@@ -116,6 +116,7 @@ const updateTournament = "update public.tournament set " +
             console.log("updated for " + input.tournament_id)
         }catch(e){
             client.query('ROLLBACK')
+            console.log("Rolling back! " + e.message)
             throw e
         }finally{
             client.release()
