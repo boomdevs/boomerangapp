@@ -42,7 +42,7 @@ const updateTournament = "update public.tournament set " +
             database: config.Database.database,
             password: config.Database.password,
             port: config.Database.port,
-        }).query('SET AUTOCOMMIT TO ON')
+        })
     
     var poolConn = function(){
 
@@ -100,6 +100,7 @@ const updateTournament = "update public.tournament set " +
 //                            .then(()=> console.log('connected'))
 //                            .catch(e => console.error('connection error', e.stack))
         var values = [input.location_city, input.location_state, input.tournament_id]
+        client.query('SET AUTOCOMMIT TO ON')
         client.query(updateTournament, values)
           .then(result => console.log(result))
           .catch(e => console.error(e.stack))
