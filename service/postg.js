@@ -110,7 +110,7 @@ const updateTournament = "update public.tournament set " +
             .then(() => console.log("UPDATE"))
             .catch(() => console.log("UPDATE FAIL"))
             
-            client.query('COMMIT')
+            client.query('COMMIT;')
             .then(() => console.log("COMMIT"))
             .catch(() => console.log("COMMIT FAIL"))
             console.log("updated for " + input.tournament_id)
