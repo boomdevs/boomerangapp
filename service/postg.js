@@ -113,7 +113,7 @@ const updateTournament = "update public.tournament set " +
           }
         })
 */         
-        client.release();
+        //client.release();
         
 /*        
         try {
