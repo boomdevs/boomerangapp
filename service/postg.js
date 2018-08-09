@@ -86,26 +86,33 @@ const updateTournament = "update public.tournament set " +
     }
     
     var changeTournament = async function(input){
+        
+        /*COA1: Change the method to be synchronous.  
+            Pro:  Fixes async/promise issue.
+            Con:  Synchronous calls are a performance hit.
+            
+          COA2: Return a generic promise.
+            Pro: Allows ansyc operations.
+            Con: I don't know how to do it (yet).
+        */
 
         const client = await pool.connect()
         
         try {
             var values = [input.location_city, input.location_state, input.tournament_id]
-            await client.query('BEGIN')
-            await client.query(updateTournament, values)
-            await client.query('COMMIT')
+            client.query('BEGIN')
+            
+            client.query(updateTournament, values)
+            client.query('COMMIT')
             console.log("updated for " + input.tournament_id)
         }catch(e){
-            await client.query('ROLLBACK')
+            client.query('ROLLBACK')
             throw e
         }finally{
             client.release()
         }
 
-            
-  
-
-        return await pool.query(getTournament,input.tournament_id)
+        return new Promise(true); 
     }
     
     return{
