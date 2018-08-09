@@ -33,7 +33,7 @@ var gresHelper = (function(){
 const updateTournament = "update public.tournament set " +
         "location_city = $1," +
         "location_state = $2" +
-        "where tournament_id = $3"
+        "where tournament_id = $3; commit;"
 
 
     const pool = new Pool({
@@ -100,7 +100,7 @@ const updateTournament = "update public.tournament set " +
 //                            .then(()=> console.log('connected'))
 //                            .catch(e => console.error('connection error', e.stack))
         var values = [input.location_city, input.location_state, input.tournament_id]
-        client.query('SET AUTOCOMMIT TO ON')
+        //client.query('SET AUTOCOMMIT TO ON')
         client.query(updateTournament, values)
           .then(result => console.log(result))
           .catch(e => console.error(e.stack))
