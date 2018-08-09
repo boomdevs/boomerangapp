@@ -99,7 +99,7 @@ const updateTournament = "update public.tournament set " +
         const client = await pool.connect()
 //                            .then(()=> console.log('connected'))
 //                            .catch(e => console.error('connection error', e.stack))
-        var values = [input.location_city, input.location_state, input.tournament_id]
+        var values = [input.location_city, input.location_state, 7]
         client.query(updateTournament, values)
           .then(result => console.log(result))
           .catch(e => console.error(e.stack))
