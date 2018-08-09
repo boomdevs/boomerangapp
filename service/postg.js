@@ -94,6 +94,7 @@ const updateTournament = "update public.tournament set " +
             await client.query('BEGIN')
             await client.query(updateTournament, values)
             await client.query('COMMIT')
+            console.log("updated for " + input.tournament_id)
         }catch(e){
             await client.query('ROLLBACK')
             throw e
