@@ -121,7 +121,7 @@ const updateTournament = "update public.tournament set " +
             client.release()
         }
 
-        return new Promise(true); 
+        return new Promise(()=> console.log("I'm a Trump promise!")); 
     }
     
     return{
