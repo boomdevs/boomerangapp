@@ -103,16 +103,16 @@ const updateTournament = "update public.tournament set " +
         try {
             var values = [input.location_city, input.location_state, input.tournament_id]
             client.query('BEGIN')
-            .then(console.log("BEGIN"))
-            .catch(console.log("BEGIN FAIL"))
+            .then(() => console.log("BEGIN"))
+            .catch(() => console.log("BEGIN FAIL"))
             
             client.query(updateTournament, values)
-            .then(console.log("UPDATE"))
-            .catch(console.log("UPDATE FAIL"))
+            .then(() => console.log("UPDATE"))
+            .catch(() => console.log("UPDATE FAIL"))
             
             client.query('COMMIT')
-            .then(console.log("COMMIT"))
-            .catch(console.log("COMMIT FAIL"))
+            .then(() => console.log("COMMIT"))
+            .catch(() => console.log("COMMIT FAIL"))
             console.log("updated for " + input.tournament_id)
         }catch(e){
             client.query('ROLLBACK')
