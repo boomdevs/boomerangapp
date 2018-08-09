@@ -96,16 +96,14 @@ const updateTournament = "update public.tournament set " +
             Con: I don't know how to do it (yet).
         */
 
-        const client = await pool.connect()
-//                            .then(()=> console.log('connected'))
-//                            .catch(e => console.error('connection error', e.stack))
+        pool.connect((err, client, done) => {
         var values = [input.location_city, input.location_state, input.tournament_id]
         client.query(updateTournament, values)
           .then(result => console.log(result))
           .catch(e => console.error(e.stack))
           .then(() => client.end())
-          
-          
+          done()
+          })
           
 /*        client.query('COMMIT', (err) => {
           if (err) {
