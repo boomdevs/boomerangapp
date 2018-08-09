@@ -42,7 +42,7 @@ const updateTournament = "update public.tournament set " +
             database: config.Database.database,
             password: config.Database.password,
             port: config.Database.port,
-        })
+        }).query('SET AUTOCOMMIT TO ON')
     
     var poolConn = function(){
 
