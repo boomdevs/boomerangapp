@@ -96,7 +96,7 @@ const updateTournament = "update public.tournament set " +
             Con: I don't know how to do it (yet).
         */
 
-        const client = await pool.connect()
+        const client = pool.connect()
 //                            .then(()=> console.log('connected'))
 //                            .catch(e => console.error('connection error', e.stack))
         
