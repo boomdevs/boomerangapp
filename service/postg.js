@@ -97,6 +97,8 @@ const updateTournament = "update public.tournament set " +
         */
 
         const client = await pool.connect()
+                            .then(()=> console.log('connected'))
+                            .catch(e => console.error('connection error', e.stack))
         
         try {
             var values = [input.location_city, input.location_state, input.tournament_id]
