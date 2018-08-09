@@ -109,6 +109,7 @@ const updateTournament = "update public.tournament set " +
           if (err) {
             console.error('Error committing transaction', err.stack)
           }
+        })
          client.release();
         
 /*        
