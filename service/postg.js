@@ -105,12 +105,15 @@ const updateTournament = "update public.tournament set " +
           .catch(e => console.error(e.stack))
           .then(() => client.end())
           
-        client.query('COMMIT', (err) => {
+          
+          
+/*        client.query('COMMIT', (err) => {
           if (err) {
             console.error('Error committing transaction', err.stack)
           }
         })
-         client.release();
+*/         
+        client.release();
         
 /*        
         try {
