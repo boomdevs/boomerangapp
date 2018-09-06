@@ -31,9 +31,19 @@ var gresHelper = (function(){
         "RETURNING tournament_id"
 
 const updateTournament = "update public.tournament set " +
-        "location_city = $1," +
-        "location_state = $2" +
-        "where tournament_id = $3;"
+        "location_name = $1," +
+        "location_address = $2," +
+        "location_city = $3," +
+        "location_state = $4" +
+        "sanction_request_date = $5," +
+        "sanction_approval_date = $6," +
+        "tournament_start_date = $7," +
+        "registration_time = $8," +
+        "event_1_start_time = $9," +
+        "rain_date = $10," +
+        "rain_date_registration_time = $11," +
+        "rain_date_event_1_start_time = $12" +
+        "where tournament_id = $13;"
 
 
     const pool = new Pool({
@@ -99,7 +109,7 @@ const updateTournament = "update public.tournament set " +
         const client = await pool.connect()
 //                            .then(()=> console.log('connected'))
 //                            .catch(e => console.error('connection error', e.stack))
-        var values = [input.location_city, input.location_state, input.tournament_id]
+        var values = [input.location_name, input.location_address, input.location_city, input.location_state, now, now, input.tournament_start_date, input.registration_start_time, input.event_1_start_time, input.rain_date, input.rain_date_registration_time, input.rain_date_event_1_start_time, input.tournament_id]
         //client.query('SET AUTOCOMMIT TO ON')
         client.query(updateTournament, values)
           .then(result => console.log(result))
