@@ -96,7 +96,7 @@ const updateTournament = "update public.tournament set " +
     }
     
     var changeTournament = async function(input){
-        
+        var now = new Date();
         /*COA1: Change the method to be synchronous.  
             Pro:  Fixes async/promise issue.
             Con:  Synchronous calls are a performance hit.
