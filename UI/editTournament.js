@@ -80,6 +80,7 @@ class EditTournamentForm extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
+            tournament_id: 0,
             location_name: 'A Place!',
             location_address: 'I want cookies.',
             location_city: "Cookie City",
@@ -93,6 +94,7 @@ class EditTournamentForm extends React.Component{
         };
         updateText = updateText.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
     
     onChange(e) {
@@ -113,16 +115,25 @@ class EditTournamentForm extends React.Component{
         this.setState({
             [name]: value
         });
-        console.log("state is now " + this.state[name])
+        console.log("state is now " + this.state[name]);
     }
 
     handleSubmit(event){
-        alert("I am handling your submit.");
+        console.log("I am handling your submit.");
         event.preventDefault();
+        console.log("updated data to send = " + JSON.stringify(this.state));
+        axios.post('https://sabrie.com:3000/tournaments', this.state)
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
     
 
     render() {
+        console.log("rendering id: " + this.state.tournament_id);
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
@@ -175,7 +186,7 @@ class EditTournamentForm extends React.Component{
                         </tbody>
                     </table>
                     
-                    <input type="submit" value="Submit" class="button" />
+                    <input type="submit" value="Submit" className="button" />
                     
                 </form>
             </div>            

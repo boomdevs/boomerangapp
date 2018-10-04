@@ -16,3 +16,15 @@ input {
   margin-top: 10px;
   border-radius: 3px;
 }
+
+.tournamentTable {
+  display: inline-block;
+}
+
+#RSVP{
+  padding: 2px;
+  color: #cc0000;
+  font-weight: bold;
+  float: right;
+  border-radius: 7px;
+}

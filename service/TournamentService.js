@@ -1,11 +1,17 @@
-var express = require('express');
-var app = express();
-var fs = require("fs");
-var helper = require('./postg.js').gresHelper;
-const https = require("https");
+/*
+An Express.js based ReST service to handle CRUD operations for tournament information.
+
+C Devers 5 SEP 2018
+*/
+
+var express = require('express'); //we use the express service library to create our service.
+var app = express();  //This creates the reference to our express.js app.
+var fs = require("fs");  //a library to use the local filesystem.  Useful for getting configuration files.
+var helper = require('./postg.js').gresHelper;  //this is our own homebrewed postgres helper.
+const https = require("https"); //Secure HTTP library.
 var bodyParser = require('body-parser');
-var config = require('config');
-var cors = require('cors');
+var config = require('config');  //we use this library for standard configuration.
+var cors = require('cors');  //Cross Origin Request Sharing library.  Useful for securely allowing calls from the UI if it hosted in another domain.
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -15,37 +21,12 @@ const options = {
 	cert: fs.readFileSync(config.Keystore.cert)
 }
 
-app.get('/generateData',function(req,res){
-
-   var data = {
-        tournaments : [
-
-            {
-                id : 1,
-                name : "Jacques' Memorial Tournament",
-                location : "Waterloo, IL"
-            },
-            {
-                id : 2,
-                name : "Chris' Wannabe Tournament",
-                location : "Cary, NC"
-            },
-            {
-                id : 3,
-                name : "It's Not Just Americans",
-                location : "Sydney, AU"
-            }
-        ]
-   }
-
-   var json = JSON.stringify(data);
-   fs.writeFile("tournament.json",json, 'utf8',function(err,json){
-       console.log("writing...");
-       console.log(json);
-   })
-
-});
-
+/*
+This operation serves get requests on the tournament endpoint.  It provides the
+ability to get/read tournament information from the database.  A simple call
+will result in a list of tournaments.  Given a tournament id, it will return 
+the details of a tournament.
+*/
 app.get('/tournaments',function(req, res, next){
     
     
@@ -71,60 +52,35 @@ app.get('/tournaments',function(req, res, next){
     
 })
 
+
+/*
+This operation allows for persisting tournament data.  Given no id, it expects
+to insert/create a new tournament.  Given an id, it tries to update an existing
+tournament.
+*/
 app.post('/tournaments',function(req, res){
 
     var input = req.body;
     
     console.log(input);
     
-    helper.createTournament(input).then(function(data){
-       console.log("Inserted new tournament with ID = " + JSON.stringify(data.rows[0].tournament_id));
-	var result = data.rows[0].tournament_id;
-       res.end(JSON.stringify(result));
-    });
-
-});
-
-
-app.post('/addNew', function(req,res){
-    
-    console.log("Adding...");
-
-    fs.readFile("tournament.json",'utf8', function(err,data){
-
-        var newTournament = {
-            id : 4,
-            name : "New Tournament",
-            location : "Someplace"
-        }
-
-        var obj = JSON.parse(data);
-
-        obj.tournaments.push(newTournament);
-
-        var json = JSON.stringify(obj);
-
-        fs.writeFile("tournament.json",json,'utf8',function(err,data){
-            console.log("Data written.");
+    if(input.tournament_id){
+        helper.changeTournament(input).then(function(data){
+           console.log("Updating tournament with ID = " + input.tournament_id);
+    	var result = data.rows[0];
+           res.end(JSON.stringify(result));
+        }).catch(function(err){
+            console.log("error caught!");
+            console.log(err);
         });
-
-    });
-
-    console.log("added");
-    res.status(200).send("Added.");
-
-})
-
-app.post('/poke',function(req, res){
-
-    console.log(req.body);
-
-  console.log('poking db...');
-
-    helper.getTournaments();
-    //helper.gresHelper.getEvents();
-    res.status(200).send("Poked.");
-    });
+    }else{
+        helper.createTournament(input).then(function(data){
+           console.log("Inserted new tournament with ID = " + JSON.stringify(data.rows[0].tournament_id));
+    	var result = data.rows[0].tournament_id;
+           res.end(JSON.stringify(result));
+        });
+    }
+});
 
 var server = https.createServer(options, app).listen(3000, function(){
     //var host = process.env.IP;
