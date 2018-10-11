@@ -14,7 +14,7 @@ input {
 
 .button {
   margin-top: 10px;
-  border-radius: 3px;
+  border-radius: 2px;
 }
 
 .tournamentTable {
@@ -23,8 +23,18 @@ input {
 
 #RSVP{
   padding: 2px;
-  color: #cc0000;
+  background-color: Red;
+  color: White;
   font-weight: bold;
   float: right;
   border-radius: 7px;
+}
+
+#register{
+  color: DodgerBlue;
+}
+#register:hover{
+  color: MediumBlue;
+  text-decoration: underline;
+  cursor: pointer;
 }
