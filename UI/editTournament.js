@@ -72,6 +72,7 @@ function getId(id){
 
 function updateText(data){
     this.setState(data);
+    console.log("UpdateText set state.")
 }
 
 class EditTournamentForm extends React.Component{
@@ -79,6 +80,7 @@ class EditTournamentForm extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
+            tournament_id: 0,
             location_name: 'A Place!',
             location_address: 'I want cookies.',
             location_city: "Cookie City",
@@ -91,6 +93,8 @@ class EditTournamentForm extends React.Component{
             rain_date_event_1_start_time: "07:00"
         };
         updateText = updateText.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
     
     onChange(e) {
@@ -105,16 +109,31 @@ class EditTournamentForm extends React.Component{
     }
     
     handleChange(event){
-        var change = event;
+        console.log("I am changing the stuffs for " + event.target.name);
+        const name = event.target.name;
+        const value = event.target.value;
+        this.setState({
+            [name]: value
+        });
+        console.log("state is now " + this.state[name]);
     }
 
     handleSubmit(event){
-        alert("I am handling your submit.");
+        console.log("I am handling your submit.");
         event.preventDefault();
+        console.log("updated data to send = " + JSON.stringify(this.state));
+        axios.post('https://sabrie.com:3000/tournaments', this.state)
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
     
 
     render() {
+        console.log("rendering id: " + this.state.tournament_id);
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
@@ -126,7 +145,7 @@ class EditTournamentForm extends React.Component{
                             </tr>
                             <tr>
                                 <td>Location</td>
-                                <td><input type="text"  name="location_name" value={this.state.location_name} onChange={this.handleChange} /></td>
+                                <td><input type="text"  name="location_name" defaultValue={this.state.location_name} value={this.state.location_name} onChange={this.handleChange} /></td>
                             </tr>
                             <tr>
                                 <td>Address</td>
@@ -142,7 +161,7 @@ class EditTournamentForm extends React.Component{
                             </tr>
                             <tr>
                                 <td>Date(s)</td>
-                                <td><input type="date" name="tournament_start_date" value={this.state.tournament_start_date} onChange={this.handleChange} /></td>
+                                <td><input type="datetime" name="tournament_start_date" value={this.state.tournament_start_date} onChange={this.handleChange} /></td>
                             </tr>
                             <tr>
                                 <td>Registration Start Time</td>
@@ -154,7 +173,7 @@ class EditTournamentForm extends React.Component{
                             </tr>
                             <tr>
                                 <td>Rain Date</td>
-                                <td><input type="date" name="rain_date" value={this.state.rain_date} onChange={this.handleChange} /></td>
+                                <td><input type="datetime" name="rain_date" value={this.state.rain_date} onChange={this.handleChange} /></td>
                             </tr>
                             <tr>
                                 <td>Rain Date Registration Start Time</td>
@@ -167,7 +186,7 @@ class EditTournamentForm extends React.Component{
                         </tbody>
                     </table>
                     
-                    <input type="submit" value="Submit" class="button" />
+                    <input type="submit" value="Submit" className="button" />
                     
                 </form>
             </div>            
