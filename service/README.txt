@@ -26,7 +26,7 @@ https://nodejs.org/en/
     
 7) Use NodeJS to run the service itself.
 
-    node TournamentService.js
+    node TournamentService.js  (or other service file)
     
 8) The service should be running on the configured at the configured port.
 

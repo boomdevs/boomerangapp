@@ -37,8 +37,8 @@ class Login extends React.Component{
                 <div>
                     <h1>Login</h1>
                     <form onSubmit={this.handleSubmit}>
-                        Username:<br/>
-                        <input type="text" name="username" onChange={this.handleChange} value={this.state.username}/><br/>
+                        Email:<br/>
+                        <input type="email" name="username" onChange={this.handleChange} value={this.state.username}/><br/>
                         Password:<br/>
                         <input type="password" name="password" onChange={this.handleChange} value={this.state.password}/><br/><br/>
                         <input type="submit" value="Submit" />
@@ -54,6 +54,21 @@ class Login extends React.Component{
     }
 }
 
+class Error extends React.Component {
+    constructor(props){
+        super(props);
+    }
+    render(){
+        if(this.props.error === null){
+            return(<div></div>);
+        }else{
+        return(
+            <p id="error">{this.props.error}</p>    
+        );
+        }
+    }
+}
+
 class Register extends React.Component{
     constructor(props){
         super(props);
@@ -64,7 +79,8 @@ class Register extends React.Component{
             last_name: "",
             nickname: "",
             usba_member: false,
-            competition_level: ["Junior","Novice","Intermediate","Advanced","Senior"]
+            competition_level: ["Junior","Novice","Intermediate","Advanced","Senior"],
+            error: null
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -72,6 +88,15 @@ class Register extends React.Component{
     
     handleSubmit(event){
         event.preventDefault;
+        if(this.state.username === "" || this.state.password === "" || this.state.first_name === "" || this.state.last_name === ""){
+            this.setState({
+                error: "You must fill in the required fields."
+            });
+        } else {
+            this.setState({
+                error: null
+            });
+        }
         console.log(this.state);
         axios.post('https://sabrie.com:3000/person', this.state)
             .then(function (response) {
@@ -96,12 +121,13 @@ class Register extends React.Component{
         let competitionLevel = this.state.competition_level.map((level) => 
            <option value={level} key={level}>{level}</option>
         );
+        let error = <Error error={this.state.error} />;
         return(
             <div>
                 <h1>Register</h1>
                 <form onSubmit={this.handleSubmit}>
-                    Username:<br/>
-                    <input type="text" name="username" onChange={this.handleChange} /><br/>
+                    Email:<br/>
+                    <input type="email" name="username" onChange={this.handleChange} /><br/>
                     Password:<br/>
                     <input type="text" name="password" onChange={this.handleChange} /><br/>
                     First Name:<br/>
@@ -111,11 +137,12 @@ class Register extends React.Component{
                     Nickname (optional):<br/>
                     <input type="text" name="nickname" onChange={this.handleChange} /><br/>
                     USBA Member:<br/>
-                    <input type="radio" name="usba_member" value={true} onChange={this.handleChange} /> Yes  <input type="radio" name="usba_member" value={false} onChange={this.handleChange} /> No<br/>
+                    <input type="radio" name="usba_member" value={true} onChange={this.handleChange} /> Yes  <input type="radio" name="usba_member" value={false} onChange={this.handleChange} defaultChecked /> No<br/>
                     Competition Level:<br/>
                     <select name="competition_level" onChange={this.handleChange}>
                         {competitionLevel}
                     </select><br/><br/>
+                    {error}
                     <input type="submit" value="Submit" />
                 </form>
                 <p>Already a member? <span id="register" onClick={this.props.registerClick}>Login here.</span></p>

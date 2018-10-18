@@ -4,12 +4,12 @@ body {
   font-family: sans-serif;
 }
 
-table, th {
-  padding-right: 5px;
-}
-
 input {
   border-radius: 3px;
+}
+
+table, th {
+  padding-right: 5px;
 }
 
 .button {
@@ -21,13 +21,8 @@ input {
   display: inline-block;
 }
 
-#RSVP{
-  padding: 2px;
-  background-color: Red;
-  color: White;
-  font-weight: bold;
-  float: right;
-  border-radius: 7px;
+#error {
+    color: red;
 }
 
 #register{
@@ -37,4 +32,13 @@ input {
   color: MediumBlue;
   text-decoration: underline;
   cursor: pointer;
+}
+
+#RSVP{
+  padding: 2px;
+  background-color: Red;
+  color: White;
+  font-weight: bold;
+  float: right;
+  border-radius: 7px;
 }
