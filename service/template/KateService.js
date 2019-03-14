@@ -34,14 +34,14 @@ app.get('/person',function(req, res, next){
             output(data);
         });
     }else{
-        console.log("No person id provided.")
+        console.log("No person id provided.");
         res.end("Nope.");
     }
     
     function output(data){
         res.end(JSON.stringify(data));
     }
-})
+});
 
 
 /*
