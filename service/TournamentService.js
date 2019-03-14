@@ -86,7 +86,7 @@ var server = https.createServer(options, app).listen(3000, function(){
     //var host = process.env.IP;
     //var port = process.env.PORT;
 
-    var host = "0.0.0.0";
+    var host = "127.0.0.1";
     var port = 3000;
 
     console.log("Listening at http://%s:%s", host, port);
