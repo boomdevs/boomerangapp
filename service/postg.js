@@ -74,7 +74,7 @@ var gresHelper = (function(){
     //Get a list of tournaments.
     var getTournaments = async function(){
 
-        return await pool.query("SELECT tournament_id, location_name FROM public.tournament");
+        return await pool.query("SELECT tournament_id, location_name, location_city, location_state, tournament_start_date FROM public.tournament");
 
     }
     
