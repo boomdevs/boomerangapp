@@ -21,7 +21,7 @@ table, th {
   display: inline-block;
 }
 
-#error {
+.error {
     color: red;
 }
 

@@ -26,13 +26,10 @@ class DropDown extends React.Component{
             console.log("Got a response:   Data = " + JSON.stringify(response.data));
             super.setState(response.data);
             }
-
           )
           .catch(function (error) {
             console.log(error);
           });
-        
-        
     }
 
 
@@ -110,8 +107,7 @@ class EditTournamentForm extends React.Component{
     
     handleChange(event){
         console.log("I am changing the stuffs for " + event.target.name);
-        const name = event.target.name;
-        const value = event.target.value;
+        const {name, value} = event.target;
         this.setState({
             [name]: value
         });

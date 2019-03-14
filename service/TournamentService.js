@@ -28,11 +28,12 @@ will result in a list of tournaments.  Given a tournament id, it will return
 the details of a tournament.
 */
 app.get('/tournaments',function(req, res, next){
-    
+//app.get('/tournaments' => (req, res, next) {
     
     if(req.query.id){
 	console.log("Getting tournament id = " + req.query.id);
         var result = helper.getTournament(req.query.id).then(function(data){
+            //var result = helper.getTournament(req.query.id).then( => (data) {
             output(data);
         });
     }else{
